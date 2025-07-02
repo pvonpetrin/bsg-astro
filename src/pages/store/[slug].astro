@@ -1,5 +1,9 @@
 ---
 import { getCollection } from "astro:content";
+import rehypeStringify from "rehype-stringify";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 import BaseLayout from "../../layouts/base.astro";
 import StoreListing from "../../components/StoreListing.astro";
 import StoreTags from "../../components/StoreTags.astro";
@@ -16,7 +20,13 @@ export const getStaticPaths = async () => {
 };
 const { store } = Astro.props;
 
-const description = store.longDescription ?? store.description;
+const longDescription = await unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use(rehypeStringify)
+  .process(store.longDescription);
+
+const description = store.longDescription ? longDescription : store.description;
 const metaDescription =
   store.description && store.description.length > 25
     ? `${store.description}`
