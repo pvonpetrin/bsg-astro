@@ -1,0 +1,27 @@
+---
+import "./base.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+}
+const { title, description, canonical } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="fonts">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

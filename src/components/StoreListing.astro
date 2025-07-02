@@ -1,0 +1,34 @@
+---
+const { store, description } = Astro.props;
+const { address1, address2, zip5, phone, hoursText, url } = store;
+---
+
+<p class="small-text">
+  {address1}<br />
+  {address2}
+  {address2 && <br />}
+
+  San Francisco, CA {zip5}<br />
+  {
+    phone && (
+      <>
+        <a href={`tel:${phone}`}>{phone}</a>
+        <br />
+      </>
+    )
+  }
+
+  {hoursText}
+</p>
+
+{
+  url && (
+    <p class="small-text">
+      <a href={url} class="external-link">
+        {url}
+      </a>
+    </p>
+  )
+}
+
+<div>{description}</div>

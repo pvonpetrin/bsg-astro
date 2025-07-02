@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/base.astro";
+import StoreListing from "../../components/StoreListing.astro";
+import StoreTags from "../../components/StoreTags.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+
+export const getStaticPaths = async () => {
+  const stores = await getCollection("stores");
+  return stores.map((store) => ({
+    params: {
+      slug: store.data.slug,
+    },
+    props: { store: store.data },
+  }));
+};
+const { store } = Astro.props;
+
+const description = store.longDescription ?? store.description;
+const metaDescription =
+  store.description && store.description.length > 25
+    ? `${store.description}`
+    : `${store.name} at bookstore.guide, your directory of San Francisco book sellers.`;
+---
+
+<BaseLayout
+  canonical={`https://bookstore.guide/store/${store.slug}/`}
+  description={metaDescription}
+  title={`${store.name} at the San Francisco Bookstore Guide`}
+>
+  <h1>{store.name}</h1>
+  <div class="content">
+    <StoreListing store={store} description={description} />
+    <StoreTags tags={store.traits} />
+  </div>
+  <SiteFooter />
+</BaseLayout>

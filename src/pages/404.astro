@@ -1,0 +1,29 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import BaseLayout from "../layouts/base.astro";
+---
+
+<BaseLayout
+  title="Error Four Hundred Four"
+  description="Page not found"
+  canonical="https://bookstore.guide/404.html"
+>
+  <div class="fof">
+    <h1>404</h1>
+    <h2>This page could not be found.</h2>
+    <SiteFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  div.fof {
+    text-align: center;
+  }
+  .fof h1,
+  .fof h2 {
+    display: block;
+  }
+  .fof .nav {
+    margin-top: 2em;
+  }
+</style>
