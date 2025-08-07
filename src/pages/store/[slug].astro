@@ -1,32 +1,26 @@
 ---
-import { getCollection } from "astro:content";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import BaseLayout from "../../layouts/base.astro";
-import StoreListing from "../../components/StoreListing.astro";
-import StoreTags from "../../components/StoreTags.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
+import BaseLayout from '../../layouts/base.astro';
+import StoreListing from '../../components/frontend/StoreListing.astro';
+import StoreTags from '../../components/frontend/StoreTags.astro';
+import SiteFooter from '../../components/frontend/SiteFooter.astro';
+import type { Store } from '../../shared/types';
+
+export const prerender = true;
 
 export const getStaticPaths = async () => {
-  const stores = await getCollection("stores");
+  const response = await fetch(import.meta.env.PUBLIC_API_URL + '/api/places');
+
+  const stores: Store[] = await response.json();
   return stores.map((store) => ({
     params: {
-      slug: store.data.slug,
+      slug: store.slug
     },
-    props: { store: store.data },
+    props: { store: store }
   }));
 };
 const { store } = Astro.props;
 
-const longDescription = await unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(rehypeStringify)
-  .process(store.longDescription);
-
-const description = store.longDescription ? longDescription : store.description;
+const description = store.longDescription || store.description;
 const metaDescription =
   store.description && store.description.length > 25
     ? `${store.description}`
@@ -36,8 +30,7 @@ const metaDescription =
 <BaseLayout
   canonical={`https://bookstore.guide/store/${store.slug}/`}
   description={metaDescription}
-  title={`${store.name} at the San Francisco Bookstore Guide`}
->
+  title={`${store.name} at the San Francisco Bookstore Guide`}>
   <h1>{store.name}</h1>
   <div class="content">
     <StoreListing store={store} description={description} />

@@ -1,4 +1,13 @@
 ---
+import type { Store } from '../../shared/types';
+
+interface Props {
+  store: Store;
+  description: string | null;
+}
+
+// description is passed separately because we may use longDescription when this component
+// is called from an individual store page
 const { store, description } = Astro.props;
 const { address1, address2, zip5, phone, hoursText, url } = store;
 ---

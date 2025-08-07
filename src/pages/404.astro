@@ -1,13 +1,14 @@
 ---
-import SiteFooter from "../components/SiteFooter.astro";
-import BaseLayout from "../layouts/base.astro";
+import SiteFooter from '../components/frontend/SiteFooter.astro';
+import BaseLayout from '../layouts/base.astro';
+
+export const prerender = true;
 ---
 
 <BaseLayout
   title="Error Four Hundred Four"
   description="Page not found"
-  canonical="https://bookstore.guide/404.html"
->
+  canonical="https://bookstore.guide/404.html">
   <div class="fof">
     <h1>404</h1>
     <h2>This page could not be found.</h2>

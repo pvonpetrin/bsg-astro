@@ -1,20 +1,21 @@
 ---
-import BaseLayout from "../layouts/base.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import BaseLayout from '../layouts/base.astro';
+import SiteFooter from '../components/frontend/SiteFooter.astro';
+
+export const prerender = true;
 ---
 
 <BaseLayout
   canonical="https://bookstore.guide/about/"
   title="San Francisco Book Store Guide - About"
-  description="About bookstore.guide - a guide to San Francisco book sellers."
->
+  description="About bookstore.guide - a guide to San Francisco book sellers.">
   <h1>About</h1>
 
   <div class="content">
     <h2 class="mt-0">What</h2>
     <p>
-      San Francisco Book Store Guide is a guide to San Francisco book sellers.
-      If you see something wrong or missing, please email
+      San Francisco Book Store Guide is a guide to San Francisco book sellers. If you see something
+      wrong or missing, please email
       <a href="mailto:pete@bookstore.guide">Pete</a>.
     </p>
 
@@ -25,15 +26,15 @@ import SiteFooter from "../components/SiteFooter.astro";
     </p>
     <h2>How</h2>
     <p>
-      This site is lovingly hand-coded using Astro. On the back end there is
-      also TypeScript, React (Next.js) with Tailwind and DaisyUI, Node and
-      Express with Prisma and MySQL.
+      This site is lovingly hand-coded using Astro. On the back end there is also TypeScript, Node,
+      and Express with Prisma and MySQL.
     </p>
     <h2>Privacy</h2>
     <p>
-      No personally identifiable information is tracked. We do not set cookies.
+      No personally identifiable information is tracked. We do not set cookies (unless you're an
+      admin).
     </p>
-    <div class="small-text">This page last updated Jun 30, 2025</div>
+    <div class="small-text">This page last updated August 6, 2025</div>
   </div>
   <SiteFooter current="About" />
 </BaseLayout>

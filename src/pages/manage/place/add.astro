@@ -1,0 +1,11 @@
+---
+import AdminLayout from '../../../layouts/admin.astro';
+import Place from '../../../components/manage/Place';
+import { PLACEHOLDER_STORE } from '../../../shared/consts';
+
+export const prerender = false;
+---
+
+<AdminLayout title="Add a Place">
+  <Place store={PLACEHOLDER_STORE} client:only="react" />
+</AdminLayout>

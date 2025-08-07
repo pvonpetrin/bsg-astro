@@ -1,0 +1,14 @@
+---
+import AdminLayout from '../../../layouts/admin.astro';
+import Place from '../../../components/manage/Place';
+
+export const prerender = false;
+
+const { id } = Astro.params;
+const response = await fetch(import.meta.env.PUBLIC_API_URL + '/api/admin/place/' + id);
+const store = await response.json();
+---
+
+<AdminLayout title={`Edit ${store.name}`}>
+  <Place store={store} client:only="react" />
+</AdminLayout>

@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../layouts/admin.astro';
+import Places from '../../components/manage/Places';
+---
+
+<AdminLayout title="Admin">
+  <Places client:only="react" />
+</AdminLayout>

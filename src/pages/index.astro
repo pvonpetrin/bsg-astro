@@ -1,17 +1,20 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../layouts/base.astro";
-import StoreListing from "../components/StoreListing.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import type { Store } from '../shared/types';
+import BaseLayout from '../layouts/base.astro';
+import StoreListing from '../components/frontend/StoreListing.astro';
+import SiteFooter from '../components/frontend/SiteFooter.astro';
 
-const stores = await getCollection("stores");
+export const prerender = true;
+
+const response = await fetch(import.meta.env.PUBLIC_API_URL + '/api/places');
+
+const stores: Store[] = await response.json();
 ---
 
 <BaseLayout
   canonical="https://bookstore.guide"
   description="Your guide to San Francisco book sellers with descriptions, hours, and contact information."
-  title="San Francisco Book Store Guide"
->
+  title="San Francisco Book Store Guide">
   <hgroup>
     <p>San Francisco</p>
     <h1>Bookstore Guide</h1>
@@ -20,16 +23,10 @@ const stores = await getCollection("stores");
     {
       stores.map((store) => (
         <div class="content">
-          <a
-            href={`${import.meta.env.BSG_BASE_URL}/store/${store.data.slug}`}
-            class="name-link"
-          >
-            {store.data.name}
+          <a href={`${import.meta.env.BSG_BASE_URL}/store/${store.slug}`} class="name-link">
+            {store.name}
           </a>
-          <StoreListing
-            store={store.data}
-            description={store.data.description}
-          />
+          <StoreListing store={store} description={store.description} />
         </div>
       ))
     }

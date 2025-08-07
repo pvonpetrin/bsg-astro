@@ -1,7 +1,8 @@
 # Bookstore Guide
 
-An API driven Astro site. Zero Javascript is served to site visitors. There are additional codebases for the content API and a content management UI which are not public. This was originally built in 11ty, and that version of the codebase can be seen at https://github.com/pvonpetrin/bookstore.guide-fe-static  
+A list of every bookstore in San Francisco. Monolith with static Front End, CMS, and API. Built with Astro, Better Auth, DaisyUI, MySQL, Prisma, React, Tailwind, and Typescript.
+
+[!WARNING]
+This software is not intended for direct re-use, although you are free to reuse any of the code as you wish.
 
 [Live site](https://bookstore.guide)
-
-
