@@ -1,14 +1,15 @@
 ---
 import AdminLayout from '../../../layouts/admin.astro';
 import Place from '../../../components/manage/Place';
-
-export const prerender = false;
+import type { Trait } from '../../../shared/types';
 
 const { id } = Astro.params;
 const response = await fetch(import.meta.env.PUBLIC_API_URL + '/api/admin/place/' + id);
 const store = await response.json();
+const traitResponse = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/admin/traits`);
+const traits: Trait[] = await traitResponse.json();
 ---
 
 <AdminLayout title={`Edit ${store.name}`}>
-  <Place store={store} client:only="react" />
+  <Place store={store} traits={traits} client:load />
 </AdminLayout>

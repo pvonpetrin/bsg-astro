@@ -2,10 +2,13 @@
 import AdminLayout from '../../../layouts/admin.astro';
 import Place from '../../../components/manage/Place';
 import { PLACEHOLDER_STORE } from '../../../shared/consts';
+import type { Trait } from '../../../shared/types';
 
 export const prerender = false;
+const traitResponse = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/admin/traits`);
+const traits: Trait[] = await traitResponse.json();
 ---
 
 <AdminLayout title="Add a Place">
-  <Place store={PLACEHOLDER_STORE} client:only="react" />
+  <Place store={PLACEHOLDER_STORE} traits={traits} client:load />
 </AdminLayout>

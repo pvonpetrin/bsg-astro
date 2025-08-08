@@ -6,17 +6,13 @@ import Traits from './Traits';
 import { PLACEHOLDER_STORE } from '../../shared/consts';
 import type { PlaceWithTraits, Trait } from '../../shared/types';
 
-type PlaceEditProps = { store: PlaceWithTraits };
-
-const traitResponse = await fetch(import.meta.env.PUBLIC_API_URL + '/api/admin/traits/');
-
-const traits: Trait[] = await traitResponse.json();
+type PlaceEditProps = { store: PlaceWithTraits; traits: Trait[] };
 
 const placeReducer = (place: PlaceWithTraits, updates: PlaceWithTraits): PlaceWithTraits => {
   return { ...place, ...updates };
 };
 
-const PlaceEdit: React.FunctionComponent<PlaceEditProps> = ({ store }: PlaceEditProps) => {
+const Place: React.FunctionComponent<PlaceEditProps> = ({ store, traits }: PlaceEditProps) => {
   const [place, setPlace] = useReducer(placeReducer, {
     ...PLACEHOLDER_STORE,
     id: store.id
@@ -196,8 +192,11 @@ const PlaceEdit: React.FunctionComponent<PlaceEditProps> = ({ store }: PlaceEdit
         <details className="clear-both  border-2 border-slate-500 p-0 mt-5 collapse collapse-plus max-w-xl">
           <summary className="collapse-title  font-bold">Traits</summary>
           <div className="collapse-content">
-            {' '}
-            <Traits traits={place.traits} onChangeHandler={handleTraitChange} />
+            <Traits
+              traits={place.traits}
+              servertraits={traits}
+              onChangeHandler={handleTraitChange}
+            />
           </div>
         </details>
 
@@ -225,4 +224,4 @@ const PlaceEdit: React.FunctionComponent<PlaceEditProps> = ({ store }: PlaceEdit
   );
 };
 
-export default PlaceEdit;
+export default Place;

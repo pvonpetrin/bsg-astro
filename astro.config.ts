@@ -11,6 +11,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://bookstore.guide',
   integrations: [aiRobotsTxt(), sitemap(), react()],
+  server: { host: true, port: 3000 },
 
   vite: {
     plugins: [tailwindcss()]
