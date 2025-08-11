@@ -26,7 +26,7 @@ const Place: React.FunctionComponent<PlaceEditProps> = ({ store, traits }: Place
       },
       body: JSON.stringify(place)
     });
-    window.location.href = '../';
+    window.location.href = `${import.meta.env.PUBLIC_API_URL}/manage`;
   };
 
   const deletePlace = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
@@ -35,7 +35,7 @@ const Place: React.FunctionComponent<PlaceEditProps> = ({ store, traits }: Place
       await fetch(`${import.meta.env.PUBLIC_API_URL}/api/admin/place/${place.id}`, {
         method: 'DELETE'
       });
-      window.location.href = '../';
+      window.location.href = `${import.meta.env.PUBLIC_API_URL}/manage`;
     }
   };
 
