@@ -20,7 +20,7 @@ const SignIn = () => {
     if (res.error) {
       setError(res.error.message || DEFAULT_ERROR_MESSAGE);
     } else {
-      window.location.href = '../../manage';
+      window.location.href = `${import.meta.env.PUBLIC_API_URL}/manage`;
     }
   };
 

@@ -1,6 +1,7 @@
 import type { Place } from '@prisma/client';
+import SignOut from '../auth/SignOut';
 
-const response = await fetch(import.meta.env.PUBLIC_API_URL + '/api/admin/places');
+const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/admin/places`);
 
 const data: Place[] = await response.json();
 
@@ -32,6 +33,7 @@ const Places: React.FunctionComponent = () => {
       <a href="../manage/place/add">
         <button className="btn">Add a Place</button>
       </a>
+      <SignOut />
       <div className="mt-4">{countMessage}</div>
       <div className="overflow-x-auto ">
         <table className="table table-zebra w-full mt-1">
