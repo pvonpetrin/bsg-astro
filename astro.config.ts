@@ -10,7 +10,16 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://bookstore.guide',
-  integrations: [aiRobotsTxt(), sitemap(), react()],
+  integrations: [
+    aiRobotsTxt(),
+    sitemap({
+      filter: (page) =>
+        !page.startsWith('https://bookstore.guide/auth') &&
+        !page.startsWith('https://bookstore.guide/api') &&
+        !page.startsWith('https://bookstore.guide/manage')
+    }),
+    react()
+  ],
   server: { host: true, port: 3000 },
 
   vite: {
